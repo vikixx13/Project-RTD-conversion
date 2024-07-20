@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resistance to Temperature Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</head>
+<body>
+    <h1>Resistance to Temperature Converter</h1>
+    <form action="/" method="post" enctype="multipart/form-data">
+        <label for="method">Choose conversion method:</label>
+        <select id="method" name="method" required>
+            <option value="single_value_conversion">Single Value Conversion</option>
+            <option value="newton_raphson">Newton-Raphson Method</option>
+            <option value="poly_fit">Polynomial Fit Method</option>
+        </select>
+        <br><br>
+
+        <div id="file_input" style="display: none;">
+            <label for="files">Upload your resistance files (max 3):</label>
+            <input type="file" id="files" name="files[]" multiple>
+            <br><br>
+            <label for="delimiter">Enter delimiter (e.g., ',' or '\t'):</label>
+            <input type="text" id="delimiter" name="delimiter">
+            <br><br>
+        </div>
+
+        <div id="single_value_input" style="display: block;">
+            <label for="resistance_value">Enter resistance value for single conversion:</label>
+            <input type="text" id="resistance_value" name="resistance_value">
+            <br><br>
+        </div>
+
+        <button type="submit">Convert</button>
+    </form>
+
+    <script>
+        document.getElementById('method').addEventListener('change', function () {
+            var method = this.value;
+            var fileInput = document.getElementById('file_input');
+            var singleValueInput = document.getElementById('single_value_input');
+
+            if (method === 'single_value_conversion') {
+                fileInput.style.display = 'none';
+                singleValueInput.style.display = 'block';
+            } else {
+                fileInput.style.display = 'block';
+                singleValueInput.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

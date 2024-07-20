@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resistance to Temperature Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</head>
+
+<body>
+    <h1>File Conversion Result</h1>
+    <ul>
+        {% for filename in filenames %}
+        <li>
+            <a href="{{ url_for('convert_to_excel', filename=filename) }}">Download {{ filename }} as Excel</a> |
+            <a href="{{ url_for('plot', filename=filename) }}">View Error vs Measured Temperature Plot</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Combine Files and Convert to Excel</h2>
+    <form action="/concatenate_and_convert_to_excel" method="post">
+        {% for filename in filenames %}
+        <label>
+            <input type="checkbox" name="files_to_concatenate[]" value="{{ filename }}"> {{ filename }}
+        </label><br>
+        {% endfor %}
+        <br>
+        <button type="submit">Combine and Convert to Excel</button>
+    </form>
+
+    <a href="/">Go back</a>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!-- plot.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error vs Measured Temperature</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</head>
+<body>
+    <h1>Error vs Measured Temperature</h1>
+    <h2>File: {{ filename }}</h2>
+    
+    <div>
+        <img src="data:image/png;base64,{{ plot_data }}" alt="Error vs Measured Temperature Plot">
+    </div>
+
+    <a href="/result/{{ filename }}">Go back to results</a>
+</body>
+</html>
